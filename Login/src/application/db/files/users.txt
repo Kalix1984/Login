@@ -1,0 +1,3 @@
+User;1234;true
+Admin;admin;true
+Deleted;1234;false
