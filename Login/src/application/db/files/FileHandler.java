@@ -20,15 +20,14 @@ public class FileHandler implements UsersHandler{
 	public List<User> generateUsersList() {
 		List<User> users = new ArrayList<>();
 
-		try {
-			File file = new File(url);
-			Scanner scan = new Scanner(file);
+		File file = new File(url);
+		
+		try (Scanner scan = new Scanner(file)){
 			while (scan.hasNextLine()) {
 				String line = scan.nextLine();
 				String[] userData = line.split(";");
 				users.add(new User(userData[0], userData[1], Boolean.parseBoolean(userData[2])));
 			}
-			scan.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File nem található!");
 		}
