@@ -5,8 +5,6 @@ public class User {
 	private String password;
 	private boolean isActive;
 	
-	//elképzelhető hogy a mezők bővítve lesznek még....
-	
 	public User(String name, String password, boolean isActive) {
 		this.name = name;
 		this.password = password;
