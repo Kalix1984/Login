@@ -1,17 +1,23 @@
 package application.login;
 
+import java.io.IOException;
 import java.util.List;
 
 import application.db.User;
 import application.db.UsersHandler;
 import application.db.files.FileHandler;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class LoginController implements Authentication{
+	@FXML 
+	private BorderPane rootPane;
+	
 	@FXML 
 	private Label alertMessage;
 	
@@ -28,18 +34,22 @@ public class LoginController implements Authentication{
 		users = usersHandler.generateUsersList();
 	}
 
-	public void login(ActionEvent event) {
+	public void login(ActionEvent event) throws IOException {
 		if (isAccessGranted()) {
-			System.out.println("Beléphet");
-			alertMessage.setVisible(false);
-			
+			loadMain();
 		} else {
 			System.out.println("Belépés megtagadva!");
 			reset();
 		}
 	}
 	
-	public void reset() {
+	public void loadMain() throws IOException {
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("Main.fxml"));
+		rootPane.getChildren().setAll(MainRoot);
+		
+	}
+	
+	private void reset() {
 		alertMessage.setVisible(true);
 		passwordField.setText("");
 	}
